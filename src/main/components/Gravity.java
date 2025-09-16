@@ -21,8 +21,7 @@ public class Gravity extends Component{
         double dt = 1.0 / Constants.SimulationConstants.FPS; // seconds per frame
                 
         // update velocity (pixels/sec)
-        object.addVelocity(new Vector2D(0.1, 90));
-        System.out.println(object.getVelocity());
+        object.addVelocity(new Vector2D(force * dt, 90));
     }
     
 }

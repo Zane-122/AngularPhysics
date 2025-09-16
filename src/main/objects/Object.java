@@ -1,5 +1,7 @@
 package main.objects;
 
+import main.Constants;
+import main.Constants.PhysicsConstants;
 import main.Constants.Vector2D;
 import main.components.Component;
 import java.awt.Graphics;
@@ -11,7 +13,7 @@ public abstract class Object {
     protected Shape shape;
 
     // Velocity in m/s
-    protected Vector2D velocity = new Vector2D(0, 0);;
+    protected Vector2D velocity = new Vector2D(10, 270);;
 
     // In kilograms per meter squared
     protected double density;
@@ -27,12 +29,18 @@ public abstract class Object {
     }
 
     public void update() {
+        double dt = 1.0 / Constants.SimulationConstants.FPS;
+
         for (Component c : components) {
             c.update(this);
         }
 
-        this.shape.translate(Math.cos(Math.toRadians(velocity.direction())) * velocity.magnitude(), Math.sin(Math.toRadians(velocity.direction())) * velocity.magnitude());
-    };
+        // Convert velocity (m/s) into pixel displacement this frame
+        double dx = Math.cos(Math.toRadians(velocity.direction())) * velocity.magnitude() * dt * PhysicsConstants.PIXELS_TO_METERS;
+        double dy = Math.sin(Math.toRadians(velocity.direction())) * velocity.magnitude() * dt * PhysicsConstants.PIXELS_TO_METERS;
+
+        this.shape.translate(dx, dy);
+    }
 
     public void draw(Graphics g) {
         shape.draw(g);
@@ -62,12 +70,12 @@ public abstract class Object {
      */
     public void addVelocity(Vector2D velocity) {
         // Convert this.velocity to x/y
-        double x1 = this.velocity.magnitude() * Math.cos(Math.toRadians(this.velocity.direction()));
-        double y1 = this.velocity.magnitude() * Math.sin(Math.toRadians(this.velocity.direction()));
+        double x1 = (this.velocity.magnitude()) * Math.cos(Math.toRadians(this.velocity.direction()));
+        double y1 = (this.velocity.magnitude()) * Math.sin(Math.toRadians(this.velocity.direction()));
 
         // Convert input velocity to x/y
-        double x2 = velocity.magnitude() * Math.cos(Math.toRadians(velocity.direction()));
-        double y2 = velocity.magnitude() * Math.sin(Math.toRadians(velocity.direction()));
+        double x2 = (velocity.magnitude()) * Math.cos(Math.toRadians(velocity.direction()));
+        double y2 = (velocity.magnitude()) * Math.sin(Math.toRadians(velocity.direction()));
 
         // Add components
         double x = x1 + x2;
