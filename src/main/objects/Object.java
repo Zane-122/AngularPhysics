@@ -17,7 +17,7 @@ public class Object {
     protected Vector2D velocity = new Vector2D(0, 0);;
 
     // In kilograms per meter squared
-    protected double density;
+    protected long density;
 
     // In meters squared
     protected double area = 1000000000;
@@ -28,7 +28,7 @@ public class Object {
     // The ID of the object
     protected int id;
     
-    public Object(Shape shape, double density, int id) {
+    public Object(Shape shape, long density, int id) {
         this.shape = shape;
         this.density = density;
         this.id = id;

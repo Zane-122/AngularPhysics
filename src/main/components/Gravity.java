@@ -31,13 +31,14 @@ public class Gravity extends Component {
 
                 if (r > 1e-6) { // avoid divide by zero
                     double m2 = obj.getMass(); // kg
-                    double a = (Constants.PhysicsConstants.G * m2) / r2;
+
+                    double eps = 300; 
+                    
+                    double softened = r2 + eps*eps;
+                    double a = (Constants.PhysicsConstants.G * m2) / softened; // accel magnitude (m/s^2)
 
                     // direction (radians)
                     double angle = Math.atan2(dy, dx);
-
-                    System.out.println("Angle: " + angle);
-                    System.out.println("Magnitude: " + a);
 
                     // velocity change (m/s)
                     object.addVelocity(new Vector2D(a * dt, Math.toDegrees(angle)));
