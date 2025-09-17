@@ -5,27 +5,33 @@ import main.Constants.PhysicsConstants;
 import main.Constants.Vector2D;
 import main.components.Component;
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import main.shapes.Shape;
 
-public abstract class Object {
+public class Object {
     protected Shape shape;
 
     // Velocity in m/s
-    protected Vector2D velocity = new Vector2D(10, 270);;
+    protected Vector2D velocity = new Vector2D(0, 0);;
 
     // In kilograms per meter squared
     protected double density;
 
     // In meters squared
-    protected double area;
+    protected double area = 1000000000;
 
+    // The components applied to the object
     protected ArrayList<Component> components = new ArrayList<Component>();
+
+    // The ID of the object
+    protected int id;
     
-    public Object(Shape shape) {
+    public Object(Shape shape, double density, int id) {
         this.shape = shape;
-        
+        this.density = density;
+        this.id = id;
     }
 
     public void update() {
@@ -90,5 +96,17 @@ public abstract class Object {
 
     public Vector2D getVelocity() {
         return this.velocity;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public Point2D getPosition() {
+        return shape.getCenter();
+    }
+
+    public double getMass() {
+        return area * density;
     }
 }

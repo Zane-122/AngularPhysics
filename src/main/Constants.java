@@ -1,5 +1,8 @@
 package main;
 
+import java.util.ArrayList;
+import main.objects.Object;
+
 public final class Constants {
     public static class WindowConstants {
         public static final int WIDTH = 1280;
@@ -8,7 +11,8 @@ public final class Constants {
 
     public static class PhysicsConstants {
         public static final double GRAVITY = 9.81;
-        public static final double PIXELS_TO_METERS = 100; // how many pixels in a meter
+        public static final double PIXELS_TO_METERS = 20; // how many pixels in a meter
+        public static final double G = 6.67430e-11;
     }
 
     public static class SimulationConstants {
@@ -17,4 +21,6 @@ public final class Constants {
     }
 
     public record Vector2D(double magnitude, double direction) {}
+
+    static public ArrayList<Object> objects = new ArrayList<Object>();
 }

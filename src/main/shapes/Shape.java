@@ -15,5 +15,7 @@ public interface Shape {
     void translate(double dx, double dy);
 
     Point2D[] getPoints();
+    Point2D getCenter();
+    
     double getSideLength();
 }

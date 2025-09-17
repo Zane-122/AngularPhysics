@@ -3,8 +3,10 @@ package main.shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
+import java.util.List;
 
 import main.Constants;
+import main.Constants.Vector2D;
 
 public class Polygon2D implements Shape {
     private int sides;
@@ -82,6 +84,22 @@ public class Polygon2D implements Shape {
     @Override
     public double getSideLength() {
         return size;
+    }
+
+    @Override
+    public Point2D getCenter() {
+        double sumX = 0;
+        double sumY = 0;
+
+        for (Point2D p : point2Ds) {
+            // assuming Vector2D has getters like getX() / getY()
+            sumX += p.getX();
+            sumY += p.getY();
+        }
+
+        int n = point2Ds.length;
+
+        return new Point2D.Double(sumX / n, sumY / n); // returns centroid
     }
 
     private void generatePoints() {
