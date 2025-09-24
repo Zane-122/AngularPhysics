@@ -3,10 +3,8 @@ package main.shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
-import java.util.List;
 
 import main.Constants;
-import main.Constants.Vector2D;
 
 public class Polygon2D implements Shape {
     private int sides;
@@ -92,14 +90,13 @@ public class Polygon2D implements Shape {
         double sumY = 0;
 
         for (Point2D p : point2Ds) {
-            // assuming Vector2D has getters like getX() / getY()
             sumX += p.getX();
             sumY += p.getY();
         }
 
         int n = point2Ds.length;
 
-        return new Point2D.Double(sumX / n, sumY / n); // returns centroid
+        return new Point2D.Double(sumX / n, sumY / n); 
     }
 
     private void generatePoints() {
@@ -109,5 +106,9 @@ public class Polygon2D implements Shape {
                 (size * Math.sin(2 * Math.PI * i / sides)) + center.getY()
             );
         }
+    }
+
+    public double getArea() {
+        return 0.5 * sides * size * size * Math.sin(2 * Math.PI / sides);
     }
 }

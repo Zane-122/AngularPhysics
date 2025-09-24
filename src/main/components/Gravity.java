@@ -1,9 +1,6 @@
 package main.components;
 
-import java.util.Optional;
-
 import main.Constants;
-import main.Constants.PhysicsConstants;
 import main.Constants.Vector2D;
 import main.objects.Object;
 
@@ -32,10 +29,10 @@ public class Gravity extends Component {
                 if (r > 1e-6) { // avoid divide by zero
                     double m2 = obj.getMass(); // kg
 
-                    double eps = 300; 
+                    double eps = 1; 
                     
                     double softened = r2 + eps*eps;
-                    double a = (Constants.PhysicsConstants.G * m2) / softened; // accel magnitude (m/s^2)
+                    double a = (Constants.PhysicsConstants.G * m2) / softened;
 
                     // direction (radians)
                     double angle = Math.atan2(dy, dx);

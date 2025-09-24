@@ -11,7 +11,7 @@ public final class Constants {
 
     public static class PhysicsConstants {
         public static final double GRAVITY = 9.81;
-        public static final double PIXELS_TO_METERS = 7.5; // how many pixels in a meter
+        public static final double PIXELS_TO_METERS = 20; // how many pixels in a meter
         public static final double G = 6.67430e-11;
     }
 

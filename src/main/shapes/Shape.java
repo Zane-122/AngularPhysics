@@ -18,4 +18,5 @@ public interface Shape {
     Point2D getCenter();
     
     double getSideLength();
+    double getArea();
 }

@@ -20,7 +20,9 @@ public class Object {
     protected long density;
 
     // In meters squared
-    protected double area = 1000000000;
+    protected double area = 0;
+
+    protected double mass;
 
     // The components applied to the object
     protected ArrayList<Component> components = new ArrayList<Component>();
@@ -28,10 +30,17 @@ public class Object {
     // The ID of the object
     protected int id;
     
-    public Object(Shape shape, long density, int id) {
+    public Object(Shape shape, long density, long mass, int id) {
         this.shape = shape;
         this.density = density;
         this.id = id;
+        this.area = shape.getArea();
+
+        if (mass != 0) {
+            this.mass = mass;
+        } else {
+            this.mass = area * density;
+        }
     }
 
     public void update() {
@@ -45,7 +54,7 @@ public class Object {
         double dx = Math.cos(Math.toRadians(velocity.direction())) * velocity.magnitude() * dt * PhysicsConstants.PIXELS_TO_METERS;
         double dy = Math.sin(Math.toRadians(velocity.direction())) * velocity.magnitude() * dt * PhysicsConstants.PIXELS_TO_METERS;
 
-        this.shape.translate(dx, dy);
+        this.shape.translate(dx, dy);        
     }
 
     public void draw(Graphics g) {
@@ -107,6 +116,6 @@ public class Object {
     }
 
     public double getMass() {
-        return area * density;
+        return mass;
     }
 }
