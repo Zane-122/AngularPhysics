@@ -17,7 +17,7 @@ class DrawingPanel extends JPanel {
 
     // Object triangle = new Object(new Polygon2D(3, 10000, new Point2D.Double(75,20)), 1, 0);
     Object moon = new Object(new Polygon2D(8, 0.25, new Point2D.Double(centerX  - 4, centerY)), 1, 1, 1);
-    Object earth = new Object(new Polygon2D(8, 1, new Point2D.Double(centerX, centerY)), 1251325215, 2000000000, 2);
+    Object earth = new Object(new Polygon2D(8, 1, new Point2D.Double(centerX, centerY)), 1251325215lazygit, 2000000000, 2);
 
     double velocity = 0;
 
