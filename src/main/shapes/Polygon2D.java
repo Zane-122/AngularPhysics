@@ -3,8 +3,10 @@ package main.shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
+import java.lang.ref.PhantomReference;
 
 import main.Constants;
+import main.Constants.PhysicsConstants;
 
 public class Polygon2D implements Shape {
     private int sides;
@@ -96,7 +98,10 @@ public class Polygon2D implements Shape {
 
         int n = point2Ds.length;
 
-        return new Point2D.Double(sumX / n, sumY / n); 
+        double xPos = sumX / n;
+        double yPos = sumY / n;
+
+        return new Point2D.Double(xPos / PhysicsConstants.PIXELS_TO_METERS, yPos / PhysicsConstants.PIXELS_TO_METERS); 
     }
 
     private void generatePoints() {

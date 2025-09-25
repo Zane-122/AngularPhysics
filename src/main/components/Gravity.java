@@ -1,7 +1,7 @@
 package main.components;
 
 import main.Constants;
-import main.Constants.Vector2D;
+import main.Constants.*;
 import main.objects.Object;
 
 public class Gravity extends Component {
@@ -15,24 +15,23 @@ public class Gravity extends Component {
 
     @Override
     public void update(Object object) {
-        double dt = 1.0 / Constants.SimulationConstants.FPS; // seconds per frame
+        double dt = 1.0 / SimulationConstants.FPS; 
         for (int i = 0; i < Constants.objects.size(); i++) {
             Object obj = Constants.objects.get(i);
             if (object.getId() != obj.getId()) {
-                // displacement (meters)
                 double dx = obj.getPosition().getX() - object.getPosition().getX();
                 double dy = obj.getPosition().getY() - object.getPosition().getY();
 
-                double r2 = dx*dx + dy*dy;
-                double r = Math.sqrt(r2);
+                double d2 = dx*dx + dy*dy;
+                double d = Math.sqrt(d2);
 
-                if (r > 1e-6) { // avoid divide by zero
+                if (d > 1e-6) { // avoid divide by zero
                     double m2 = obj.getMass(); // kg
 
-                    double eps = 1; 
+                    double eps = 250; 
                     
-                    double softened = r2 + eps*eps;
-                    double a = (Constants.PhysicsConstants.G * m2) / softened;
+                    double softened = d2 + eps*eps;
+                    double a = (PhysicsConstants.G * m2) / softened;
 
                     // direction (radians)
                     double angle = Math.atan2(dy, dx);
