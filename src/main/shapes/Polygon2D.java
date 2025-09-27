@@ -3,7 +3,6 @@ package main.shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
-import java.lang.ref.PhantomReference;
 
 import main.Constants;
 import main.Constants.PhysicsConstants;

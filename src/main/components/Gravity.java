@@ -15,7 +15,7 @@ public class Gravity extends Component {
 
     @Override
     public void update(Object object) {
-        double dt = 1.0 / SimulationConstants.FPS; 
+
         for (int i = 0; i < Constants.objects.size(); i++) {
             Object obj = Constants.objects.get(i);
             if (object.getId() != obj.getId()) {
@@ -28,7 +28,7 @@ public class Gravity extends Component {
                 if (d > 1e-6) { // avoid divide by zero
                     double m2 = obj.getMass(); // kg
 
-                    double eps = 250; 
+                    double eps = 250; ; 
                     
                     double softened = d2 + eps*eps;
                     double a = (PhysicsConstants.G * m2) / softened;
@@ -37,7 +37,7 @@ public class Gravity extends Component {
                     double angle = Math.atan2(dy, dx);
 
                     // velocity change (m/s)
-                    object.addVelocity(new Vector2D(a * dt, Math.toDegrees(angle)));
+                    object.addVelocity(new Vector2D(a * SimulationConstants.dt, Math.toDegrees(angle)));
                 }
             }
         }       

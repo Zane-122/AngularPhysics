@@ -1,7 +1,7 @@
 package main.objects;
 
-import main.Constants;
 import main.Constants.PhysicsConstants;
+import main.Constants.SimulationConstants;
 import main.Constants.Vector2D;
 import main.components.Component;
 import java.awt.Graphics;
@@ -43,16 +43,22 @@ public class Object {
         }
     }
 
-    public void update() {
-        double dt = 1.0 / Constants.SimulationConstants.FPS;
+    public Object(Shape shape, double mass, int id) {
+        this.shape = shape;
+        this.id = id;
+        this.area = shape.getArea();
 
+        this.mass = mass;
+    }
+
+    public void update() {
         for (Component c : components) {
             c.update(this);
         }
 
         // Convert velocity (m/s) into pixel displacement this frame
-        double dx = Math.cos(Math.toRadians(velocity.direction())) * velocity.magnitude() * dt * PhysicsConstants.PIXELS_TO_METERS;
-        double dy = Math.sin(Math.toRadians(velocity.direction())) * velocity.magnitude() * dt * PhysicsConstants.PIXELS_TO_METERS;
+        double dx = Math.cos(Math.toRadians(velocity.direction())) * velocity.magnitude() * SimulationConstants.dt * PhysicsConstants.PIXELS_TO_METERS;
+        double dy = Math.sin(Math.toRadians(velocity.direction())) * velocity.magnitude() * SimulationConstants.dt * PhysicsConstants.PIXELS_TO_METERS;
 
         this.shape.translate(dx, dy);        
     }
@@ -83,7 +89,7 @@ public class Object {
      * Add velocity to the current velocity
      * @param velocity the velocity you want to add
      */
-    public void addVelocity(Vector2D velocity) {
+    public Object addVelocity(Vector2D velocity) {
         // Convert this.velocity to x/y
         double x1 = (this.velocity.magnitude()) * Math.cos(Math.toRadians(this.velocity.direction()));
         double y1 = (this.velocity.magnitude()) * Math.sin(Math.toRadians(this.velocity.direction()));
@@ -101,6 +107,8 @@ public class Object {
         double angle = Math.toDegrees(Math.atan2(y, x));
 
         this.velocity = new Vector2D(mag, angle);
+
+        return this;
     }
 
     public Vector2D getVelocity() {
